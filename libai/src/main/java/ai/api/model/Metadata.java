@@ -43,6 +43,12 @@ public class Metadata implements Serializable {
     private String webhookUsed;
 
     /**
+     * Indicates whether conversation ends with the response.
+     */
+    @SerializedName("endConversation")
+    private boolean endConversation = Boolean.FALSE;
+
+    /**
      * Name of the intent that produced this result
      */
     public String getIntentName() {
@@ -63,15 +69,23 @@ public class Metadata implements Serializable {
     public void setIntentId(final String intentId) {
         this.intentId = intentId;
     }
-    
+
     /**
      * Indicates wheather webhook functionaly is enabled in the triggered intent.
      */
     public boolean isWebhookUsed() {
     	return webhookUsed != null ? Boolean.valueOf(webhookUsed) : false;
     }
-    
+
     public void setWebhookUsed(boolean webhookUsed) {
     	this.webhookUsed = Boolean.toString(webhookUsed);
+    }
+
+    public boolean isEndConversation() {
+        return endConversation;
+    }
+
+    public void setEndConversation(boolean endConversation) {
+        this.endConversation = endConversation;
     }
 }

@@ -33,6 +33,13 @@ public class MetadataTest {
     		+ "\"intentId\":\"Id\","
     		+ "\"webhookUsed\":\"true\""
     		+ "}";
+
+
+    private static final String TEST_METADATA_WITH_ENDCONVERSATION = "{\"intentName\":\"Name\","
+            + "\"intentId\":\"Id\","
+            + "\"webhookUsed\":\"true\","
+            + "\"endConversation\":\"true\""
+            + "}";
     
     private static final String TEST_METADATA_EMPTY = "{}";
 
@@ -44,7 +51,19 @@ public class MetadataTest {
 		assertEquals("Name", metadata.getIntentName());
 		assertEquals("Id", metadata.getIntentId());
 		assertTrue(metadata.isWebhookUsed());
+        assertEquals(false, metadata.isEndConversation());
 	}
+
+    @Test
+    public void testDeserializationEndConversation() {
+
+        final Metadata metadata = gson.fromJson(TEST_METADATA_WITH_ENDCONVERSATION, Metadata.class);
+
+        assertEquals("Name", metadata.getIntentName());
+        assertEquals("Id", metadata.getIntentId());
+        assertTrue(metadata.isWebhookUsed());
+        assertEquals(true, metadata.isEndConversation());
+    }
 	
 	@Test
 	public void testDeserializationNoWebhook() {
